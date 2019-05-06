@@ -1,0 +1,8 @@
+PersonModule DEFINITIONS ::=
+BEGIN
+Person ::= SEQUENCE {
+       height INTEGER,
+       width INTEGER,
+       name OCTET STRING
+}
+END

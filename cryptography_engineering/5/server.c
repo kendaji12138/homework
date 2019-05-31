@@ -12,8 +12,8 @@ int main(int argc, char const *argv[])
 	struct sockaddr_in address; 
 	int opt = 1; 
 	int addrlen = sizeof(address); 
-	char buffer[1024] = {0}; 
-	char *hello = "Hello from server"; 
+	char recvbuf[1024] = {0}; 
+	char sendbuf[1024] = {0}; 
 	
 	// Creating socket file descriptor 
 	if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) 
@@ -50,10 +50,14 @@ int main(int argc, char const *argv[])
 	{ 
 		perror("accept"); 
 		exit(EXIT_FAILURE); 
-	} 
-	valread = read( new_socket , buffer, 1024); 
-	printf("%s\n",buffer ); 
-	send(new_socket , hello , strlen(hello) , 0 ); 
-	printf("Hello message sent\n"); 
+	}
+	// recv RA from A
+	valread = read( new_socket , recvbuf, 1024); 
+	printf("recv RA from A\n");
+	// send RB,SB to A
+	send(new_socket , sendbuf , strlen(sendbuf) , 0 ); 
+	printf("sent RB to A\n");
+	// recv SA
+	// calculate S2 and verify S2=SA?
 	return 0; 
 } 
